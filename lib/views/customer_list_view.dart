@@ -1,6 +1,6 @@
+import 'package:customerapp/views/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
 import '../controllers/auth_controller.dart';
 import '../controllers/customer_controller.dart';
 import 'customer_details_view.dart';
@@ -35,7 +35,7 @@ class CustomerListView extends StatelessWidget {
       ),
       body: Obx(() {
         if (customerController.isLoading.value && customerController.customers.isEmpty) {
-          return _buildShimmerLoading();
+          return const ShimmerLoading();
         } else if (customerController.customers.isEmpty) {
           return Center(
             child: Text(
@@ -73,7 +73,7 @@ class CustomerListView extends StatelessWidget {
                     leading: customer.imageUrl == null
                         ? const Icon(Icons.person, size: 40, color: Colors.blueAccent)
                         : ClipOval(
-                      child: Image.network(
+                          child: Image.network(
                         'https://www.pqstec.com/InvoiceApps/${customer.imageUrl}',
                         width: 40,
                         height: 40,
@@ -101,46 +101,6 @@ class CustomerListView extends StatelessWidget {
           );
         }
       }),
-    );
-  }
-
-  Widget _buildShimmerLoading() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(8),
-      itemCount: 6,
-      itemBuilder: (context, index) {
-        return Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: Card(
-            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: ListTile(
-              leading: Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  shape: BoxShape.circle,
-                ),
-              ),
-              title: Container(
-                width: double.infinity,
-                height: 10,
-                color: Colors.grey[300],
-              ),
-              subtitle: Container(
-                width: 150,
-                height: 10,
-                color: Colors.grey[300],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }

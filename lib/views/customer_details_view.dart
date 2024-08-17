@@ -1,10 +1,12 @@
+import 'package:customerapp/views/widgets/detail_card.dart';
+import 'package:customerapp/views/widgets/detail_row.dart';
 import 'package:flutter/material.dart';
 import '../models/customer.dart';
 
 class CustomerDetailsView extends StatelessWidget {
   final Customer customer;
 
-  CustomerDetailsView({required this.customer});
+  const CustomerDetailsView({super.key, required this.customer});
 
   @override
   Widget build(BuildContext context) {
@@ -20,29 +22,29 @@ class CustomerDetailsView extends StatelessWidget {
             _buildProfileHeader(),
             const SizedBox(height: 20),
             _buildSectionTitle('General Information'),
-            _buildDetailCard([
-              _buildDetailRow(Icons.account_circle, 'ID', customer.id?.toString() ?? 'N/A'),
-              _buildDetailRow(Icons.email, 'Email', customer.email ?? 'N/A'),
-              _buildDetailRow(Icons.home, 'Primary Address', customer.primaryAddress ?? 'N/A'),
-              _buildDetailRow(Icons.home_work, 'Secondary Address', customer.secondaryAddress ?? 'N/A'),
-              _buildDetailRow(Icons.note, 'Notes', customer.notes ?? 'N/A'),
-              _buildDetailRow(Icons.phone, 'Phone', customer.phone ?? 'N/A'),
-              _buildDetailRow(Icons.people, 'Customer Type', customer.custType ?? 'N/A'),
-              _buildDetailRow(Icons.supervisor_account, 'Parent Customer', customer.parentCustomer ?? 'N/A'),
+            DetailCard(children: [
+              DetailRow(icon: Icons.account_circle, label: 'ID', value: customer.id.toString()),
+              DetailRow(icon: Icons.email, label: 'Email', value: customer.email ?? 'N/A'),
+              DetailRow(icon: Icons.home, label: 'Primary Address', value: customer.primaryAddress ?? 'N/A'),
+              DetailRow(icon: Icons.home_work, label: 'Secondary Address', value: customer.secondaryAddress ?? 'N/A'),
+              DetailRow(icon: Icons.note, label: 'Notes', value: customer.notes ?? 'N/A'),
+              DetailRow(icon: Icons.phone, label: 'Phone', value: customer.phone ?? 'N/A'),
+              DetailRow(icon: Icons.people, label: 'Customer Type', value: customer.custType ?? 'N/A'),
+              DetailRow(icon: Icons.supervisor_account, label: 'Parent Customer', value: customer.parentCustomer ?? 'N/A'),
             ]),
             const SizedBox(height: 20),
             _buildSectionTitle('Financial Information'),
-            _buildDetailCard([
-              _buildDetailRow(Icons.attach_money, 'Total Balance', customer.balance?.toStringAsFixed(2) ?? 'N/A'),
-              _buildDetailRow(Icons.calendar_today, 'Last Sales Date', customer.lastSalesDate == "" ? 'N/A' : customer.lastSalesDate.toString()),
-              _buildDetailRow(Icons.receipt, 'Last Invoice No', customer.lastInvoiceNo == "" ? 'N/A' : customer.lastInvoiceNo.toString()),
-              _buildDetailRow(Icons.shopping_cart, 'Last Sold Product', customer.lastSoldProduct == "" ? 'N/A' : customer.lastSoldProduct.toString()),
-              _buildDetailRow(Icons.money, 'Total Sales Value', customer.totalSalesValue?.toStringAsFixed(2) ?? 'N/A'),
-              _buildDetailRow(Icons.undo, 'Total Sales Return Value', customer.totalSalesReturnValue?.toStringAsFixed(2) ?? 'N/A'),
-              _buildDetailRow(Icons.arrow_back, 'Total Amount Back', customer.totalAmountBack?.toStringAsFixed(2) ?? 'N/A'),
-              _buildDetailRow(Icons.collections, 'Total Collection', customer.totalCollection?.toStringAsFixed(2) ?? 'N/A'),
-              _buildDetailRow(Icons.calendar_today, 'Last Transaction Date', customer.lastTransactionDate ?? 'N/A'),
-              _buildDetailRow(Icons.business, 'Client Company Name', customer.clientCompanyName ?? 'N/A'),
+            DetailCard(children: [
+              DetailRow(icon: Icons.attach_money, label: 'Total Balance', value: customer.balance.toStringAsFixed(2)),
+              DetailRow(icon: Icons.calendar_today, label: 'Last Sales Date', value: customer.lastSalesDate == "" ? 'N/A' : customer.lastSalesDate.toString()),
+              DetailRow(icon: Icons.receipt, label: 'Last Invoice No', value: customer.lastInvoiceNo == "" ? 'N/A' : customer.lastInvoiceNo.toString()),
+              DetailRow(icon: Icons.shopping_cart, label: 'Last Sold Product', value: customer.lastSoldProduct == "" ? 'N/A' : customer.lastSoldProduct.toString()),
+              DetailRow(icon: Icons.money, label: 'Total Sales Value', value: customer.totalSalesValue?.toStringAsFixed(2) ?? 'N/A'),
+              DetailRow(icon: Icons.undo, label: 'Total Sales Return Value', value: customer.totalSalesReturnValue?.toStringAsFixed(2) ?? 'N/A'),
+              DetailRow(icon: Icons.arrow_back, label: 'Total Amount Back', value: customer.totalAmountBack?.toStringAsFixed(2) ?? 'N/A'),
+              DetailRow(icon: Icons.collections, label: 'Total Collection', value: customer.totalCollection?.toStringAsFixed(2) ?? 'N/A'),
+              DetailRow(icon: Icons.calendar_today, label: 'Last Transaction Date', value: customer.lastTransactionDate ?? 'N/A'),
+              DetailRow(icon: Icons.business, label: 'Client Company Name', value: customer.clientCompanyName ?? 'N/A'),
             ]),
           ],
         ),
@@ -77,42 +79,5 @@ class CustomerDetailsView extends StatelessWidget {
       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent),
     );
   }
-
-  Widget _buildDetailCard(List<Widget> children) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 3,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: children,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDetailRow(IconData icon, String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.blueAccent),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              label,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              textAlign: TextAlign.right,
-              style: const TextStyle(color: Colors.black54,fontWeight: FontWeight.bold),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
+
