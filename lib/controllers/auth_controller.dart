@@ -65,7 +65,7 @@ class AuthController extends GetxController {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 "Do you really want to log out?",
                 textAlign: TextAlign.center,
@@ -74,7 +74,7 @@ class AuthController extends GetxController {
                   color: Colors.grey[600],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -91,7 +91,7 @@ class AuthController extends GetxController {
                       storage.erase();
                       Get.offAll(() => LoginView());
                     },
-                    child: Text(
+                    child: const Text(
                       "Yes",
                       style: TextStyle(color: Colors.white),
                     ),
@@ -106,7 +106,7 @@ class AuthController extends GetxController {
                     onPressed: () {
                       Get.back();
                     },
-                    child: Text(
+                    child: const Text(
                       "No",
                       style: TextStyle(color: Colors.white),
                     ),
