@@ -33,8 +33,7 @@ class CustomerController extends GetxController {
       customers.clear();
     }
 
-    final url =
-        'https://www.pqstec.com/InvoiceApps/Values/GetCustomerList?searchquery=&pageNo=$currentPage&pageSize=$pageSize&SortyBy=Balance';
+    final url = 'https://www.pqstec.com/InvoiceApps/Values/GetCustomerList?searchquery=&pageNo=$currentPage&pageSize=$pageSize&SortyBy=Balance';
 
     final response = await http.get(
       Uri.parse(url),

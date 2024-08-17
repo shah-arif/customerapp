@@ -24,8 +24,7 @@ class AuthController extends GetxController {
   Future<void> login(String username, String password, int comId) async {
     isLoading.value = true;
 
-    final url =
-        'https://www.pqstec.com/InvoiceApps/Values/LogIn?UserName=$username&Password=$password&ComId=$comId';
+    final url = 'https://www.pqstec.com/InvoiceApps/Values/LogIn?UserName=$username&Password=$password&ComId=$comId';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
